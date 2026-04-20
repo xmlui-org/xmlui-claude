@@ -2,12 +2,12 @@
 name: xmlui-setup
 description: Set up a complete XMLUI development environment. Use when the user wants to start XMLUI development, install the XMLUI CLI, configure the MCP server, or create a new XMLUI project.
 disable-model-invocation: true
-allowed-tools: Bash, Read, Edit, Write
+allowed-tools: Bash, Read, Edit, Write, AskUserQuestion
 ---
 
 # XMLUI Development Environment Setup
 
-`xmlui-setup` installs the XMLUI CLI, downloads the `xmlui-weather` app (which includes the Inspector for debugging), and starts a local webserver to run the app.
+`xmlui-setup` downloads the `xmlui-weather` app (which includes the Inspector for debugging) and starts a local webserver to run the app. The XMLUI CLI is auto-installed by the MCP server wrapper on first use.
 
 Run every step automatically — do not ask the user for confirmation between steps.
 
@@ -25,59 +25,58 @@ If it fails, tell the user what to install and stop. Do not proceed until prefli
 
 ---
 
-## Step 2: Install the XMLUI CLI
+## Step 2: Ensure the CLI is available
 
-Check if already installed:
+The MCP server's `.mcp.json` auto-downloads the CLI on first use. Verify it's ready:
 
 ```bash
-test -x "${CLAUDE_PLUGIN_DATA}/bin/xmlui" && echo "found" || echo "not found"    # macOS / Linux
-test -x "${CLAUDE_PLUGIN_DATA}/bin/xmlui.exe" && echo "found" || echo "not found" # Windows
+"${CLAUDE_PLUGIN_DATA}/bin/xmlui" --help
 ```
 
-If found, skip to Step 3.
-
-If not found, run:
+If this fails, install manually:
 
 ```bash
 CLAUDE_PLUGIN_DATA="${CLAUDE_PLUGIN_DATA}" "${CLAUDE_SKILL_DIR}/scripts/install-cli.sh"
 ```
 
-Verify with `"${CLAUDE_PLUGIN_DATA}/bin/xmlui" --help` before continuing.
-
 ---
 
 ## Step 3: MCP server
 
-The MCP server is configured automatically via the plugin's `.mcp.json` — no manual setup needed.
+The MCP server is configured automatically via the plugin's `.mcp.json` and auto-installs the CLI binary on first use. No manual setup or extra restart needed.
 
 ---
 
 ## Step 4: Download the weather app
 
-Check if `xmlui-weather` already exists in the current directory:
+Use AskUserQuestion to ask the user where to create the project. Offer `~/xmlui-weather` as the recommended default, and the current directory as an alternative. The user can also type a custom path.
+
+Once you have the target path (resolve `~` to `$HOME`), check if that directory already exists:
 
 ```bash
-test -d xmlui-weather && echo "exists" || echo "ok"
+test -d <target-path> && echo "exists" || echo "ok"
 ```
 
-If it exists, tell the user and ask what they'd like to name the project directory instead. Otherwise, proceed.
+If it exists, tell the user and stop — do not overwrite.
 
-Run:
+Otherwise, create the project at the chosen location:
 
 ```bash
-"${CLAUDE_PLUGIN_DATA}/bin/xmlui" new xmlui-weather --output xmlui-weather
+"${CLAUDE_PLUGIN_DATA}/bin/xmlui" new xmlui-weather --output <target-path>
 ```
+
+Remember the chosen path — you will need it in Step 5.
 
 ---
 
 ## Step 5: Start the dev server
 
 ```bash
-cd <project-dir> && "${CLAUDE_PLUGIN_DATA}/bin/xmlui" run
+cd <target-path> && "${CLAUDE_PLUGIN_DATA}/bin/xmlui" run
 ```
 
 Tell the user: **Open a browser to the indicated port (usually 8080).** You should see the Weather Dashboard with a magnifying glass icon in the top right — that's the Inspector.
 
 Then tell the user:
 
-> **Your XMLUI environment is ready.** See the [README](https://github.com/xmlui-org/xmlui-claude#readme) for a guided tour of the XMLUI MCP tools and the Inspector.
+> **Your XMLUI environment is ready.** Quit Claude Code now and restart **from the `<target-path>` directory** so the MCP server can find your project. See the [README](https://github.com/xmlui-org/xmlui-claude#readme) for a guided tour of the XMLUI MCP tools and the Inspector.

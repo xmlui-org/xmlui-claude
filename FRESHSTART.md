@@ -69,19 +69,18 @@ Navigate to the directory where you want your project created, then:
 The skill will:
 
 1. **Preflight** — check that `curl`, `tar`, etc. are available
-2. **Install the XMLUI CLI** — downloads the platform-specific binary to the plugin's data directory (`~/.claude/plugins/data/xmlui-xmlui-claude/bin/xmlui`). It does not need to be on your PATH.
-3. **Confirm the MCP server** — the plugin's `.mcp.json` auto-registers the MCP server. No manual `claude mcp add` needed.
+2. **Deploy the wrapper script** — copies the lazy-install wrapper to the plugin data directory. The wrapper auto-downloads the CLI binary on first use.
+3. **Confirm the MCP server** — the plugin's `.mcp.json` auto-registers the MCP server via the wrapper. No manual `claude mcp add` needed, and no second restart required.
 4. **Create the weather app** — scaffolds `xmlui-weather` in the current directory
-5. **Configure the Inspector** — enables tracing (`xsVerbose` in config.json), downloads trace-tools files, and injects the `<Inspector />` component into `Main.xmlui`
-6. **Start the dev server** — runs `xmlui run` (usually on port 8080)
+5. **Start the dev server** — runs `xmlui run` (usually on port 8080)
 
 Open a browser to the indicated port. You should see the Weather Dashboard with a magnifying glass icon in the top right — that's the Inspector.
 
-**Restart Claude Code one more time** so the MCP server picks up the newly installed CLI binary, then `cd` back to your project directory.
+No additional restart is needed — the MCP server uses the wrapper script, which auto-installs the CLI binary.
 
 ## 5. Verify the MCP server
 
-After the final restart, ask Claude something like:
+Ask Claude something like:
 
 ```
 how does DataSource work?
