@@ -20,17 +20,15 @@ Get a running XMLUI app, an AI assistant that knows the XMLUI docs, and a built-
 
 When prompted for install scope, choose the default: *Install for you (user scope)*.
 
-**Restart Claude Code now.** The plugin's MCP server and skills require a fresh session to load. This is the only restart you need.
+**Restart Claude Code now.** The plugin's MCP server and skills require a fresh session to load.
 
 ## Set up
-
-Navigate to the directory where you want your project, then:
 
 ```
 /xmlui:xmlui-setup
 ```
 
-This downloads the XMLUI CLI (if not already installed), creates the `xmlui-weather` app, and starts a dev server. The MCP server auto-installs the CLI on first use, so no second restart is needed.
+This downloads the XMLUI CLI (if not already installed), creates the `xmlui-weather` app in a directory you choose, starts a dev server on port 8080, and opens a browser to view the app.
 
 ## Explore the MCP tools
 
