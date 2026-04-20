@@ -63,7 +63,7 @@ Expected output:
 Navigate to the directory where you want your project created, then:
 
 ```
-/xmlui:xmlui-setup
+/xmlui-setup
 ```
 
 The skill will:
@@ -74,7 +74,7 @@ The skill will:
 4. **Create the weather app** — scaffolds `xmlui-weather` in the current directory
 5. **Start the dev server** — runs `xmlui run` (usually on port 8080)
 
-Open a browser to the indicated port. You should see the Weather Dashboard with a magnifying glass icon in the top right — that's the Inspector.
+The app opens automatically in your default browser. You should see the Weather Dashboard with a magnifying glass icon in the top right — that's the Inspector.
 
 No additional restart is needed — the MCP server uses the wrapper script, which auto-installs the CLI binary.
 
@@ -113,4 +113,4 @@ Restart Claude Code after updating.
 | Plugin files | `~/.claude/plugins/cache/xmlui-claude/xmlui/<version>/` |
 | CLI binary | `~/.claude/plugins/data/xmlui-xmlui-claude/bin/xmlui` |
 | MCP server | Runs via the CLI: `xmlui mcp` (auto-registered by `.mcp.json`) |
-| Project files | Wherever you ran `/xmlui:xmlui-setup` |
+| Project files | Wherever you ran `/xmlui-setup` |

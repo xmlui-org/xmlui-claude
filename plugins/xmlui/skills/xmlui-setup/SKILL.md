@@ -75,8 +75,8 @@ Remember the chosen path — you will need it in Step 5.
 cd <target-path> && "${CLAUDE_PLUGIN_DATA}/bin/xmlui" run
 ```
 
-Tell the user: **Open a browser to the indicated port (usually 8080).** You should see the Weather Dashboard with a magnifying glass icon in the top right — that's the Inspector.
+The dev server opens the app in the default browser automatically.
 
-Then tell the user:
+Tell the user:
 
 > **Your XMLUI environment is ready.** See the [README](https://github.com/xmlui-org/xmlui-claude#readme) for a guided tour of the XMLUI MCP tools and the Inspector.
