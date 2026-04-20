@@ -79,4 +79,4 @@ Tell the user: **Open a browser to the indicated port (usually 8080).** You shou
 
 Then tell the user:
 
-> **Your XMLUI environment is ready.** Quit Claude Code now and restart **from the `<target-path>` directory** so the MCP server can find your project. See the [README](https://github.com/xmlui-org/xmlui-claude#readme) for a guided tour of the XMLUI MCP tools and the Inspector.
+> **Your XMLUI environment is ready.** See the [README](https://github.com/xmlui-org/xmlui-claude#readme) for a guided tour of the XMLUI MCP tools and the Inspector.
