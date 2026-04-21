@@ -9,7 +9,7 @@ source "${SCRIPT_DIR}/common.sh"
 log "Running preflight checks"
 require_cmd curl
 require_cmd uname
-require_cmd claude
+get_claude_cmd > /dev/null
 
 detect_platform
 if [[ "${PLATFORM_OS}" == "win" ]]; then

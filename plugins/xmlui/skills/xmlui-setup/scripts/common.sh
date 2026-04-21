@@ -41,6 +41,16 @@ detect_platform() {
   esac
 }
 
+get_claude_cmd() {
+  for candidate in claude.cmd claude; do
+    if command -v "${candidate}" >/dev/null 2>&1; then
+      echo "${candidate}"
+      return 0
+    fi
+  done
+  fail "Claude CLI not found. Install Claude Code and ensure claude/claude.cmd is on PATH."
+}
+
 ensure_path_export() {
   local install_dir="$1"
   local shell_name rc_file line
